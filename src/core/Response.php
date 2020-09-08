@@ -17,6 +17,12 @@ final class Response
         $this->headers = [];
     }
 
+    public function cookie(string $name, string $value, int $expiration): Response
+    {
+        setcookie($name, $value, $expiration);
+        return $this;
+    }
+
     public function status(int $code): Response
     {
         if ($code < 100 || $code > 599) {
