@@ -13,7 +13,8 @@
             "Atlas\\": "src/",
             "Atlas\\Core\\": "src/core",
             "Atlas\\App\\": "src/app",
-            "Atlas\\Tests\\": "tests"
+            "Atlas\\Tests\\": "tests",
+            "Atlas\\Tests\\Core\\": "tests/src/core"
         }
     },
 

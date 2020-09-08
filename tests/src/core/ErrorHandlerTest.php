@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Atlas\Tests;
+namespace Atlas\Tests\Core;
 
 use PHPUnit\Framework\TestCase;
+use Atlas\Tests\PHPUnitUtils;
 use Atlas\Core\ErrorHandler;
 
 final class ErrorHandlerTest extends TestCase
