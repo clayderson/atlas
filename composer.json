@@ -12,7 +12,8 @@
         "psr-4": {
             "Atlas\\": "src/",
             "Atlas\\Core\\": "src/core",
-            "Atlas\\App\\": "src/app"
+            "Atlas\\App\\": "src/app",
+            "Atlas\\Tests\\": "tests"
         }
     },
 
