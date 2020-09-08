@@ -101,11 +101,11 @@ final class Route
         [$class, $method] = $controller;
 
         if (!class_exists($class)) {
-            throw new Exception("The class ${class} could not be found", 500);
+            throw new Exception("The class ${class} could not be found");
         }
 
         if (!method_exists($class, $method)) {
-            throw new Exception("The method {$method} was not found in the class {$class}", 500);
+            throw new Exception("The method {$method} was not found in the class {$class}");
         }
 
         $controllerResponse = (new $class)->$method(self::$request, self::$response, $params);
