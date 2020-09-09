@@ -31,11 +31,6 @@ final class Request
         return $this->method;
     }
 
-    public function all(): array
-    {
-        return array_merge($this->get, $this->post);
-    }
-
     public function only(array $filter): array
     {
         $callback = function ($key) use ($filter) {
@@ -60,6 +55,11 @@ final class Request
             $callback,
             ARRAY_FILTER_USE_KEY
         );
+    }
+
+    public function all(): array
+    {
+        return array_merge($this->get, $this->post);
     }
 
     public function query(string $key)
