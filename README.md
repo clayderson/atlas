@@ -1,6 +1,6 @@
 # Atlas
 
-###### Getting Started
+###### Getting started
 ```
 git clone git@github.com:clayderson/atlas.git && cd atlas
 composer install
@@ -11,5 +11,5 @@ php -S 127.0.0.1:4000 ./src/public/index.php
 ```
 ###### For execute all tests
 ```
-./vendor/bin/phpunit tests
+./vendor/bin/phpunit tests --testdox
 ```
