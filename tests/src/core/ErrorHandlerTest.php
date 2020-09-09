@@ -10,30 +10,24 @@ use Atlas\Core\ErrorHandler;
 
 final class ErrorHandlerTest extends TestCase
 {
-    public function testNormalizeStatusCodeWithValidCode(): void
+    public function testNormalizeStatusCodeWithValidHttpCode(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeStatusCode', [
+        $this->assertEquals(404, PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeStatusCode', [
             404,
-        ]);
-
-        $this->assertEquals(404, $result);
+        ]));
     }
 
-    public function testNormalizeStatusCodeWithInvalidCode(): void
+    public function testNormalizeStatusCodeWithInvalidHttpCode(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeStatusCode', [
-            600,
-        ]);
-
-        $this->assertEquals(500, $result);
+        $this->assertEquals(500, PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeStatusCode', [
+            999,
+        ]));
     }
 
-    public function testNormalizeMessage(): void
+    public function testNormalizeErrorMessage(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeMessage', [
+        $this->assertIsString(PHPUnitUtils::getPrivateMethod(ErrorHandler::class, 'normalizeMessage', [
             500, 'Any error message'
-        ]);
-
-        $this->assertIsString($result);
+        ]));
     }
 }

@@ -10,61 +10,49 @@ use Atlas\Core\Env;
 
 final class EnvTest extends TestCase
 {
-    public function testIsLoadedBeforeLoad(): void
+    public function testReturnsFalseIfIsLoadedWasCalledBeforeTheLoadMethod(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'isLoaded');
-        $this->assertEquals(false, $result);
+        $this->assertEquals(false, PHPUnitUtils::getPrivateMethod(Env::class, 'isLoaded'));
     }
 
-    public function testIsLoadedAfterLoad(): void
+    public function testReturnsTrueIfIsLoadedWasCalledAfterTheLoadMethod(): void
     {
         PHPUnitUtils::getPrivateMethod(Env::class, 'load');
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'isLoaded');
-        $this->assertEquals(true, $result);
+        $this->assertEquals(true, PHPUnitUtils::getPrivateMethod(Env::class, 'isLoaded'));
     }
 
     public function testGetWithNotRecognizedEnvironmentVariable(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'get', [
-            str_shuffle('ABCDEF'), 'Cupcake'
-        ]);
-
-        $this->assertEquals('Cupcake', $result);
+        $this->assertEquals('cupcake', PHPUnitUtils::getPrivateMethod(Env::class, 'get', [
+            'UNDEFINED_ENV_VARIABLE', 'cupcake'
+        ]));
     }
 
-    public function testGetWithDebugEnvironmentVariable(): void
+    public function testGetBooleanValueOfDebugEnvironmentVariable(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'get', [
+        $this->assertIsBool(PHPUnitUtils::getPrivateMethod(Env::class, 'get', [
             'DEBUG'
-        ]);
-
-        $this->assertIsBool($result);
+        ]));
     }
 
     public function testParseBooleanWithParsableString(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
+        $this->assertEquals(false, PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
             'false',
-        ]);
-
-        $this->assertEquals(false, $result);
+        ]));
     }
 
     public function testParseBooleanWithUnparseableString(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
+        $this->assertEquals('Atlas', PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
             'Atlas',
-        ]);
-
-        $this->assertEquals('Atlas', $result);
+        ]));
     }
 
     public function testParseBooleanWithEmptyString(): void
     {
-        $result = PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
+        $this->assertEquals('', PHPUnitUtils::getPrivateMethod(Env::class, 'parseBoolean', [
             '',
-        ]);
-
-        $this->assertEquals('', $result);
+        ]));
     }
 }
